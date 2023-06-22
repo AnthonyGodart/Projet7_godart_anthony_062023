@@ -1,4 +1,6 @@
 const express = require('express');
+const helmet = require('helmet');
+const mongoSanitize = require('express-mongo-sanitize')
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const booksRoutes = require('./routes/books');
@@ -14,6 +16,10 @@ mongoose.connect('mongodb+srv://testuser:TestUS3R@cluster.4srddnz.mongodb.net/?r
   .catch(() => console.log('Connexion à MongoDB échouée !'));
 
 app.use(express.json());
+app.use(helmet());
+app.use(mongoSanitize());
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json());
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -22,7 +28,7 @@ app.use((req, res, next) => {
     next();
   });
 
-app.use(bodyParser.json());
+
 
 app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use('/api/books', booksRoutes);
