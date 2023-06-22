@@ -4,13 +4,18 @@
 
 ### Configuration :
 
+You can create a workspace directory and clone both backend and frontend directories in it.
+Or you can clone in different directories and run them separately.
+
 :arrow_forward: Clone project's backend :
 
     git clone https://github.com/AnthonyGodart/Projet7_godart_anthony_062023.git backend
 
 Install dependencies ( use yarn instead of npm if you're not using it ):
 
-    npm install express mongoose mongoose-unique-validator bcrypt jsonwebtoken
+    cd backend
+    npm install express erpress-validator express-mongo-sanitize mongoose mongoose-unique-validator bcrypt jsonwebtoken
+    npm install --save helmet
 
 If not installed on your machine :
 
@@ -27,5 +32,6 @@ Then run backend with :
     git clone https://github.com/OpenClassrooms-Student-Center/P7-Dev-Web-livres.git frontend
 Then run frontend with :
 
+    cd frontend
     npm install
     npm start
