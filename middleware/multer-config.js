@@ -30,8 +30,13 @@ const storage = multer.memoryStorage({
   }
 });
 
+const multerOptions = {
+  storage: storage,
+  fileFilter: fileFilter
+};
+
 module.exports = (req, res, next) => {
-  const middlewareMulter = multer({ storage }).single('image');
+  const middlewareMulter = multer({ multerOptions }).single('image');
 
   middlewareMulter(req, res, (err) => {
     if (err instanceof multer.MulterError) {
