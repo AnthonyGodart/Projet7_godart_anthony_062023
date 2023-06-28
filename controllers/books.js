@@ -25,15 +25,15 @@ exports.createBook = (req, res) => {
 };
 
 exports.modifyBook = (req, res, next) => {
-    const bookObject = { ...req.body };
+    const bookObject = req.file ? { ...JSON.parse(req.body.book) } : { ...req.body};
     delete bookObject._userId;
-  
+
     Book.findOne({ _id: req.params.id })
       .then((book) => {
         if (book.userId !== req.auth.userId) {
           return res.status(401).json({ message: 'Not authorized' });
         };
-        let imagePath = book.imageUrl;  
+        let imagePath = book.imageUrl;
         if (req.file) {
           imagePath = `${req.protocol}://${req.get('host')}/images/${req.file.originalname}`;
           bookObject.imageUrl = imagePath;
@@ -46,7 +46,7 @@ exports.modifyBook = (req, res, next) => {
                   console.error(error);
                 };
               });
-            };  
+            };
             res.status(200).json({ message: 'Livre modifié!' });
           })
           .catch((error) => res.status(401).json({ error }));

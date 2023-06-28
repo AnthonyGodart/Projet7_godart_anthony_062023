@@ -27,16 +27,12 @@ const storage = multer.memoryStorage({
     const nameWithoutExtension = path.parse(file.originalname).name;
     const name = nameWithoutExtension.split(' ').join('_');
     callback(null, name + Date.now() + '.webp');
-  }
+  },
+  fileFilter: fileFilter
 });
 
-const multerOptions = {
-  storage: storage,
-  fileFilter: fileFilter
-};
-
 module.exports = (req, res, next) => {
-  const middlewareMulter = multer({ multerOptions }).single('image');
+  const middlewareMulter = multer({ storage }).single('image');
 
   middlewareMulter(req, res, (err) => {
     if (err instanceof multer.MulterError) {
