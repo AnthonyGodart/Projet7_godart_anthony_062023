@@ -14,8 +14,7 @@ Or you can clone in different directories and run them separately.
 Install dependencies ( use yarn instead of npm if you're not using it ):
 
     cd backend
-    npm install express erpress-validator express-mongo-sanitize mongoose mongoose-unique-validator bcrypt jsonwebtoken
-    npm install --save helmet
+    npm install
 
 If not installed on your machine :
 
